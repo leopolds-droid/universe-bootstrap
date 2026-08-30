@@ -1,0 +1,32 @@
+{
+  "schema": "UNIVERSE_BOOTSTRAP_V1",
+  "service": "universe-resume",
+  "api_version": "v1",
+  "authority": "/projects",
+  "purpose": "Provider-neutral public discovery only; no project state or secrets are exposed here.",
+  "rules": [
+    "Never infer or guess a project slug.",
+    "Current project state must come from authenticated canonical resume data.",
+    "CURRENT_TASK/canonical AI_CONTEXT outranks handoff, memory, sessions, dreaming and wiki for current state.",
+    "Wiki and semantic memory are recall/derived knowledge, not authority.",
+    "If authenticated canonical data cannot be read, stop rather than inventing state."
+  ],
+  "protected_resume_api_base": "https://openclaw.gustavg.ddnss.eu",
+  "authenticated_endpoints": {
+    "projects": "/v1/projects",
+    "resume": "/v1/projects/{project_slug}/resume",
+    "source": "/v1/projects/{project_slug}/source/{source_name}"
+  },
+  "required_auth": "Authorization: Bearer <token>",
+  "resume_contract": {
+    "success_status": "PASS",
+    "blocked_status": "BLOCKED",
+    "freshness_ok": [
+      "RESUME_FRESHNESS_OK",
+      "HANDOFF_STALE"
+    ],
+    "freshness_blocked": [
+      "CHECKPOINT_STALE"
+    ]
+  }
+}
